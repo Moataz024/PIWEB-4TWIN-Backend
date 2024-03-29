@@ -1,8 +1,8 @@
 FROM node:16
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN sudo groupadd -r appuser && useradd -r -g appuser appuser
 WORKDIR /app
 COPY package*.json ./
-RUN chown -R appuser:appuser /app
+RUN sudo chown -R appuser:appuser /app
 USER appuser
 RUN npm install nodemon
 RUN npm install
