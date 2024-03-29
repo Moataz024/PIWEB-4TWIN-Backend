@@ -10,7 +10,7 @@ RUN chown -R appuser:appuser /app
 
 USER appuser
 
-RUN mkdir ~/.npm-global
+RUN mkdir -p /home/appuser/.npm-global/bin
 
 ENV PATH=/home/appuser/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/appuser/.npm-global
