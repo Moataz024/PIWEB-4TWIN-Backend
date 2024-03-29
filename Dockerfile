@@ -4,8 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN chown -R appuser:appuser /app
 USER appuser
-RUN npm install nodemon --force
+RUN npm install nodemon
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "run","dev"]
