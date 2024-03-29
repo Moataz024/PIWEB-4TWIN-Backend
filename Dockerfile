@@ -1,11 +1,26 @@
 FROM node:16
+
 RUN groupadd -r appuser && useradd -r -g appuser appuser
+
 WORKDIR /app
+
 COPY package*.json ./
+
 RUN chown -R appuser:appuser /app
+
 USER appuser
-RUN npm install nodemon
+
+RUN mkdir ~/.npm-global
+
+ENV PATH=/home/appuser/.npm-global/bin:$PATH
+ENV NPM_CONFIG_PREFIX=/home/appuser/.npm-global
+
+RUN npm install -g nodemon
+
 RUN npm install
+
 COPY . .
+
 EXPOSE 3000
+
 CMD ["npm", "run", "dev"]
