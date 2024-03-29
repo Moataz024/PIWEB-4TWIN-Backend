@@ -1,8 +1,11 @@
 FROM node:16
-WORKDIR ./lutback
-COPY package*.json ./lutback
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+WORKDIR /app
+COPY package*.json ./
+RUN chown -R appuser:appuser /app
+USER appuser
+RUN npm install nodemon --force
+RUN npm install
 COPY . .
-RUN npm i nodemon --force
-RUN npm install --force
 EXPOSE 3000
-CMD ["npm","run","dev"]
+CMD ["npm", "start"]
